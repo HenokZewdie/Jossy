@@ -1,0 +1,2156 @@
+---
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Accounts
+  description: The Accounts API allows you to retrieve account and transaction data
+    for Citi Customers who have authorized your app. In most cases, you'll want to
+    request a summary of all accounts first, which will return basic account information
+    and accountIds. Once you have this information, you can request additional account
+    details and/or transactions.
+basePath: /gcb//api
+schemes:
+- https
+tags: []
+definitions:
+  CheckingAccountSummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Personal Checking Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: CA_CA301
+      accountNickname:
+        type: string
+        description: The nickname of the account assigned by the customer
+        example: Account for Tax Deduction Only
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      accountId:
+        type: string
+        description: The customer account identifier in encrypted format.
+        example: AB34512DEF984DBBACEA
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: ASSET
+      currentBalance:
+        description: The current balance including any pending or in progress deposits
+          and withdrawals
+        type: number
+        format: double
+        example: 10000.250000
+      availableBalance:
+        description: The available balance of the saving account. It is the amount
+          available  to withdraw or transfer immediately
+        type: number
+        format: double
+        example: 15000.250000
+  AccountSummary:
+    properties:
+      checkingAccountSummary:
+        $ref: '#/definitions/CheckingAccountSummary'
+      savingsAccountSummary:
+        $ref: '#/definitions/SavingsAccountSummary'
+      creditCardAccountSummary:
+        $ref: '#/definitions/CreditCardAccountSummary'
+      readyCreditAccountSummary:
+        $ref: '#/definitions/ReadyCreditAccountSummary'
+      loanAccountSummary:
+        $ref: '#/definitions/LoanAccountSummary'
+      mutualFundAccountSummary:
+        $ref: '#/definitions/MutualFundAccountSummary'
+      securitiesBrokerageAccountSummary:
+        $ref: '#/definitions/SecuritiesBrokerageAccountSummary'
+      callDepositAccountSummary:
+        $ref: '#/definitions/CallDepositAccountSummary'
+      premiumDepositAccountSummary:
+        $ref: '#/definitions/PremiumDepositAccountSummary'
+      timeDepositAccountSummary:
+        $ref: '#/definitions/TimeDepositAccountSummary'
+  TimeDepositAccountSummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Time Deposit
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: TD_1YRT
+      accountNickname:
+        type: string
+        description: The nickname of the account assigned by the customer
+        example: Time Deposit
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2364
+      accountId:
+        type: string
+        description: The customer account identifier in encrypted format.
+        example: 3255613852316f2b4d4d796c344e38756339654972776f663745446e6d4c32486f455a4165374a476858343d
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: ASSET
+      currentBalance:
+        description: The account balance on the time deposit account
+        type: number
+        format: double
+        example: 166171.530000
+      originalPrincipalAmount:
+        description: The amount invested
+        type: number
+        format: double
+        example: 10000.250000
+      maturityDate:
+        type: string
+        format: date
+        description: The date when the time deposit will mature in ISO8601 date format
+          YYYY-MM-DD
+        example: "2015-06-30"
+  GroupBalance:
+    properties:
+      localCurrencyCode:
+        type: string
+        description: The currency code for local country in ISO 4217 format
+        example: AUD
+      localCurrencyBalanceAmount:
+        type: number
+        format: double
+        description: Summarized balances in local currency
+        example: 8900.120000
+      foreignCurrencyCode:
+        type: string
+        description: The foreign currency code for foreign country in ISO 4217 format
+        example: SGD
+      foreignCurrencyBalanceAmount:
+        type: number
+        format: double
+        description: Summarized balances in foreign currency
+        example: 8880.250000
+  CreditCardAccountSummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Citibank Platinum Visa
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0071_VC301
+      accountNickname:
+        type: string
+        description: The nickname of the account assigned by the customer
+        example: Credit Card Account for My Travels
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXXXXXXXX0364
+      accountId:
+        type: string
+        description: The customer account identifier in encrypted format.
+        example: 3255613852316f2b4d4d796c344e38756339654972776f663745446e6d4c32486f455a4165374a476858343d
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: LIABILITY
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      outstandingBalance:
+        description: The amount of money owed on the credit account. It is the outstanding
+          balance in applicable level (either card, account or relationship levels)
+        type: number
+        format: double
+        example: 10000.250000
+      availableCredit:
+        description: Available Credit limit on the credit card
+        type: number
+        format: double
+        example: 15000.250000
+      creditLimit:
+        description: The maximum amount of credit that extend to a customer
+        type: number
+        format: double
+        example: 25000.250000
+      minimumDueAmount:
+        description: Minimum due amount for a payment cycle
+        type: number
+        format: double
+        example: 256.500000
+      paymentDueDate:
+        description: The payment due date in ISO 8601 date format YYYY-MM-DD
+        type: string
+        format: date
+        example: "2016-10-05"
+      alternateCurrency:
+        description: The alternate currency
+        type: string
+        example: USD
+      alternateCurrencyCurrentBalance:
+        description: The current balance in alternate currency
+        type: number
+        format: double
+        example: 1534.250000
+      cardHolderType:
+        description: Indicator to specify whether the card is primary or supplementary.
+          This is a reference data field. Please use /v1/apac/utilities/referenceData/{cardHolderType}
+          resource to get valid value of this field with description.
+        type: string
+        example: PRIMARY
+  PremiumDepositAccountSummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Premium Deposit Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: PD_301
+      accountNickname:
+        type: string
+        description: The nickname of the account assigned by the customer
+        example: PD Account
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      accountId:
+        type: string
+        description: The customer account identifier in encrypted format.
+        example: 3255613852316f2b4d4d796c344e38756339654972776f663745446e6d4c32486f455a4165374a476858343d
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: ASSET
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      currentBalance:
+        description: The current market worth of investment
+        type: number
+        format: double
+        example: 166171.530000
+      originalPrincipalAmount:
+        description: The amount invested
+        type: number
+        format: double
+        example: 10000.250000
+      maturityDate:
+        type: string
+        format: date
+        description: The date when the time deposit will mature in ISO8601 date format
+          YYYY-MM-DD
+        example: "2015-06-30"
+  MutualFundAccountSummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Citibank Platinum Visa
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0071_VC301
+      accountNickname:
+        type: string
+        description: The nickname of the account assigned by the customer
+        example: Credit Card Account for My Travels
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      accountId:
+        type: string
+        description: The customer account identifier in encrypted format.
+        example: 3255613852316f2b4d4d796c344e38756339654972776f663745446e6d4c32486f455a4165374a476858343d
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: LIABILITY
+      currentBalance:
+        description: Total fund value for the Investment mutual fund account. It is
+          the current market worth of investment
+        type: number
+        format: double
+        example: 166171.530000
+  SavingsAccountSummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Personal Savings Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: SA_1000
+      accountNickname:
+        type: string
+        description: The nickname of the account assigned by the customer
+        example: Personal Savings Account
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      accountId:
+        type: string
+        description: The customer account identifier in encrypted format.
+        example: 3255613852316f2b4d4d796c344e38756339654972776f663745446e6d4c32486f455a4165374a476858343d
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: ASSET
+      currentBalance:
+        description: The current balance including any pending or in progress deposits
+          and withdrawals
+        type: number
+        format: double
+        example: 10000.250000
+      availableBalance:
+        description: The amount available  to withdraw or transfer immediately
+        type: number
+        format: double
+        example: 15000.250000
+  ErrorResponse:
+    properties:
+      type:
+        description: Invalid - Request did not confirm to the specification and was
+          unprocessed and rejected. Please fix the value and try again
+        enum:
+        - error
+        - warn
+        - invalid
+        - fatal
+        type: string
+      code:
+        description: Error code which qualifies the error
+        type: string
+      details:
+        description: Human readable explanation specific to the occurrence of the
+          problem
+        type: string
+      location:
+        description: The name of the field that resulted in the error
+        type: string
+      moreInfo:
+        description: URI to human readable documentation of the error
+        type: object
+    required:
+    - type
+    - code
+  SecuritiesBrokerageAccountSummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Citibank Platinum Visa
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0071_VC301
+      accountNickname:
+        type: string
+        description: The nickname of the account assigned by the customer
+        example: Credit Card Account for My Travels
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      accountId:
+        type: string
+        description: The customer account identifier in encrypted format.
+        example: 3255613852316f2b4d4d796c344e38756339654972776f663745446e6d4c32486f455a4165374a476858343d
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: LIABILITY
+      currentBalance:
+        description: Total fund value for the Investment brokerage account. It is
+          the current market worth of investment
+        type: number
+        format: double
+        example: 166171.530000
+  ReadyCreditAccountSummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Ready Credit
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: RC_RC100
+      accountNickname:
+        type: string
+        description: The nickname of the account assigned by the customer
+        example: Ready Credit Account
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      accountId:
+        type: string
+        description: The customer account identifier in encrypted format.
+        example: 3255613852316f2b4d4d796c344e38756339654972776f663745446e6d4c32486f455a4165374a476858343d
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: LIABILITY
+      outstandingBalance:
+        description: The amount of money owed.
+        type: number
+        format: double
+        example: 10000.250000
+      availableCredit:
+        description: Available Credit for the ready credit account. It is the amount
+          that is available to be charged to a ready credit account
+        type: number
+        format: double
+        example: 15000.250000
+      nextPaymentAmount:
+        type: number
+        format: double
+        description: The next payment amount due
+        example: 9230.670000
+      nextPaymentDate:
+        type: string
+        format: date
+        description: The date of the next payment in ISO 8601 date format YYYY-MM-DD
+        example: "2018-06-13"
+  LoanAccountSummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Personal Loan Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: PL_001
+      accountNickname:
+        type: string
+        description: The nickname of the account assigned by the customer
+        example: Personal Loan Account
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      accountId:
+        type: string
+        description: The customer account identifier in encrypted format.
+        example: 3255613852316f2b4d4d796c344e38756339654972776f663745446e6d4c32486f455a4165374a476858343d
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: LIABILITY
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      originalPrincipalAmount:
+        description: The amount borrowed
+        type: number
+        format: double
+        example: 10000.250000
+      outstandingBalance:
+        description: The amount of money owed.
+        type: number
+        format: double
+        example: 15000.250000
+      nextPaymentAmount:
+        type: number
+        format: double
+        description: The next payment amount due
+        example: 9230.670000
+      nextPaymentDate:
+        type: string
+        format: date
+        description: The date of the next payment in ISO 8601 date format YYYY-MM-DD
+        example: "2018-06-13"
+  AccountsGroupList:
+    properties:
+      accountGroupSummary:
+        type: array
+        description: Summarized list of every product group by the customer
+        items:
+          $ref: '#/definitions/AccountGroupSummary'
+      nextStartIndex:
+        type: string
+        description: In some cases there is more data than what can be returned in
+          a single response. If there is additional data available a nextStartIndex
+          will be returned. Pass the nextStartIndex in your next request to retrieve
+          the next set of data.
+        example: "11"
+  CallDepositAccountSummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Citi bank Platinum Visa
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0071_VC301
+      accountNickname:
+        type: string
+        description: The nickname of the account assigned by the customer
+        example: Credit Card Account for My Travels
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      accountId:
+        type: string
+        description: The customer account identifier in encrypted format.
+        example: 3255613852316f2b4d4d796c344e38756339654972776f663745446e6d4c32486f455a4165374a476858343d
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: LIABILITY
+      currentBalance:
+        description: The current balance on the Deposit account. The available balance
+          including any pending or in progress deposits and withdrawals
+        type: number
+        format: double
+        example: 166171.530000
+  AccountGroupSummary:
+    properties:
+      accountGroup:
+        type: string
+        description: Account group is a classification of accounts according to their
+          common characteristics. This is a reference data field. Please use /v1/apac/utilities/referenceData/{accountGroup}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: SAVINGS
+      accounts:
+        type: array
+        description: Summarized list of each account type under a specific product
+          group, held by customer
+        items:
+          $ref: '#/definitions/AccountSummary'
+      insurancePolicies:
+        type: array
+        description: Summarized list of every insurance policy held by the customer.
+        items:
+          $ref: '#/definitions/InsurancePolicySummary'
+      totalCurrentBalance:
+        $ref: '#/definitions/GroupBalance'
+      totalAvailableBalance:
+        $ref: '#/definitions/GroupBalance'
+      totalOutstandingBalance:
+        $ref: '#/definitions/GroupBalance'
+    required:
+    - accountGroup
+    - accounts
+  InsurancePolicySummary:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Personal Life Insurance Policy
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: IN_PLI
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: AUD
+      accountClassification:
+        type: string
+        description: Classification of account either as ASSET or LIABILITY. This
+          is a reference data field. Please use /v1/apac/utilities/referenceData/{accountClassification}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: ASSET
+      accountStatus:
+        type: string
+        description: Status of the account. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{accountStatus} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      displayPolicyNumber:
+        description: A masked policy number that can be displayed to the customer.
+        type: string
+        example: XXXXXXXX0368
+      insuranceApplicationId:
+        description: Insurance Application Number. This field is used to retrieve
+          insurance policy details
+        type: string
+        example: "1100000125"
+      insuranceSumAssuredAmount:
+        type: number
+        format: double
+        description: Sum assured amount of the insurance
+        example: 100000.250000
+      totalPremiumPaidAmount:
+        description: Total premium paid for the insurance policy
+        type: number
+        format: double
+        example: 6171.530000
+    required:
+    - displayPolicyNumber
+    - insuranceApplicationId
+  MutualFund:
+    properties:
+      netAssetValueAmount:
+        type: number
+        format: double
+        description: The current market worth of investment
+        example: 166171.530000
+      fundCode:
+        type: string
+        description: The code of the fund
+        example: AFZ03
+      fundName:
+        type: string
+        description: The name of the fund
+        example: AXA - Australian Property Fund
+      investmentAmount:
+        type: number
+        format: double
+        description: The investment amount
+        example: 166000.250000
+      currencyCode:
+        type: string
+        description: The currency code of the account in ISO 4217 format
+        example: EUR
+      maturityDate:
+        type: string
+        format: date
+        description: The maturity date in ISO 8601 format YYYY-MM-DD
+        example: "2018-12-31"
+      availableUnits:
+        type: number
+        format: double
+        description: The available units
+        example: 1000.250000
+      settledUnits:
+        type: number
+        format: double
+        description: The settled units
+        example: 800.250000
+      assignedUnits:
+        type: number
+        format: double
+        description: The assigned units
+        example: 1000.250000
+      confirmedUnits:
+        type: number
+        format: double
+        description: The confirmed units
+        example: 800.250000
+      pendingUnits:
+        type: number
+        format: double
+        description: The pending units
+        example: 200.250000
+      blockUnits:
+        type: number
+        format: double
+        description: The blocked units
+        example: 0
+      unrealizedGains:
+        type: number
+        format: double
+        description: The unrealized gain
+        example: 10.250000
+      unrealizedPercentageGain:
+        type: number
+        format: double
+        description: The unrealized gain in percentage
+        example: 12.500000
+      latestPrice:
+        type: number
+        format: double
+        description: The latest price
+        example: 15.250000
+  LoanAccount:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Loan Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0800_VC601
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      originalPrincipalAmount:
+        type: number
+        format: double
+        description: The amount borrowed
+        example: 200000.250000
+      currentPrincipalAmount:
+        type: number
+        format: double
+        description: The remaining principal amount
+        example: 18000.250000
+      outstandingBalance:
+        type: number
+        format: double
+        description: The amount of money owed.
+        example: 20000.250000
+      currencyCode:
+        type: string
+        description: The currency code in ISO 4217 format
+        example: EUR
+      maturityDate:
+        type: string
+        format: date
+        description: Loan maturity date in ISO 8601 date format YYYY-MM-DD
+        example: "2037-12-31"
+      openingDate:
+        type: string
+        format: date
+        description: Loan account opening date in ISO 8601 date format YYYY-MM-DD
+        example: "2007-12-01"
+      lastPaymentDate:
+        type: string
+        format: date
+        description: The date of the last payment in ISO 8601 format YYYY-MM-DD
+        example: "2014-01-14"
+      lastPaymentAmount:
+        type: number
+        format: double
+        description: The amount of the last payment made
+        example: 8463.250000
+      interestAmount:
+        type: number
+        format: double
+        description: Interest amount paid for the mentioned period
+        example: 91504.810000
+      interestAccumulationPeriod:
+        type: string
+        description: The period of interest accumulation. This is a reference data
+          field. Please use /v1/apac/utilities/referenceData/{interestAccumulationPeriod}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: YEAR_TO_DATE
+      nextPaymentAmount:
+        type: number
+        format: double
+        description: The next payment amount due
+        example: 9230.670000
+      nextPaymentDate:
+        type: string
+        format: date
+        description: The date of the next payment in ISO 8601 date format YYYY-MM-DD
+        example: "2018-06-13"
+      paymentFrequency:
+        type: string
+        description: The payment frequency
+        example: MONTHLY
+      interestType:
+        type: string
+        description: The interest type. This is a reference data field. Please use
+          /v1/apac/utilities/referenceData/{interestType} resource to get valid value
+          of this field with description. You can use the field name as the referenceCode
+          parameter to retrieve the values.
+        example: VARIABLE
+      interestRate:
+        type: number
+        format: double
+        description: Loan interest rate.
+        example: 10.080000
+      effectiveInterestRate:
+        type: number
+        format: double
+        description: Loan effective interest rate
+        example: 10.100000
+      installmentAmount:
+        type: number
+        format: double
+        description: Installment loan payment amount
+        example: 1200.250000
+      remainingTermNumber:
+        type: number
+        description: Term remaining.
+        example: 1200.250000
+      pastDueAmount:
+        type: number
+        format: double
+        description: Past due is a loan payment that has not been made as of its due
+          date
+        example: 20000.250000
+      paidPrincipalAmount:
+        type: number
+        format: double
+        description: The amount of principal returned to the bank
+        example: 200000.250000
+      lateChargeAmount:
+        type: number
+        format: double
+        description: Late charge amount applicable when amount is not paid by the
+          due date
+        example: 20000.250000
+    required:
+    - displayAccountNumber
+  CreditCardAccount:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Credit Card Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0500_VC901
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXXXXXXXX2391
+      currencyCode:
+        type: string
+        description: The currency code of the account in ISO 4217 format
+        example: EUR
+      outstandingBalance:
+        description: The amount of money owed.
+        type: number
+        format: double
+        example: 10000.250000
+      lastStatementBalance:
+        description: The balance on last statement date
+        type: number
+        format: double
+        example: 15000.250000
+      lastStatementDate:
+        type: string
+        format: date
+        description: The date of the last statement in ISO 8601 date format YYYY-MM-DD
+        example: "2015-06-25"
+      creditUsed:
+        type: number
+        format: double
+        description: The part of the credit limit already used
+        example: 3750.250000
+      creditLimit:
+        type: number
+        format: double
+        description: The maximum amount of credit that extend to a customer
+        example: 50000.250000
+      availableCredit:
+        type: number
+        format: double
+        description: The available credit
+        example: 3750.250000
+      cashAdvanceLimit:
+        type: number
+        format: double
+        description: Some percentage of credit limit to withdraw cash
+        example: 15000.250000
+      cashAdvanceAvailableAmount:
+        type: number
+        format: double
+        description: Cash advance amount available. This will be same as the cash
+          limit if there is no cash advance done. Otherwise, this will be the amount
+          from the cashLimit minus the cash advance amount already used
+        example: 15000.250000
+      lastPaymentAmount:
+        type: number
+        format: double
+        description: The amount of the last payment made
+        example: 1500.250000
+      lastPaymentDate:
+        type: string
+        format: date
+        description: The date of the last payment in ISO 8601 date format YYYY-MM-DD
+        example: "2015-06-12"
+      minimumDueAmount:
+        type: number
+        format: double
+        description: Minimum due amount for a payment cycle
+        example: 1500.250000
+      paymentDueDate:
+        type: string
+        format: date
+        description: The date of the next payment/payment due date in ISO 8601 date
+          format YYYY-MM-DD
+        example: "2015-06-12"
+      availablePointBalance:
+        type: number
+        description: Available reward points on the credit card
+        example: 1500.250000
+    required:
+    - displayAccountNumber
+  TimeDepositAccount:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Time Deposit Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0600_VC101
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      originalPrincipalAmount:
+        type: number
+        format: double
+        description: The original principal amount when account opened.
+        example: 10000.250000
+      currencyCode:
+        type: string
+        description: The currency code of the account in ISO 4217 format
+        example: EUR
+      interestRate:
+        type: number
+        format: double
+        description: The rate of interest applicable for the time deposit
+        example: 0.052500
+      openingDate:
+        type: string
+        format: date
+        description: The opening date of the time deposit, in ISO 8601 format YYYY-MM-DD
+        example: "2015-12-01"
+      maturityDate:
+        type: string
+        format: date
+        description: The date when the time deposit will mature, in ISO 8601 format
+          YYYY-MM-DD
+        example: "2016-12-13"
+      nextInterestPaymentDate:
+        type: string
+        format: date
+        description: The date when interest will be paid by Citibank, in ISO8601 format
+          YYYY-MM-DD
+        example: "2017-01-01"
+      interestAmountDue:
+        type: number
+        format: double
+        description: The accrued interest amount which has not yet been paid by Citibank
+        example: 100.250000
+      renewalInstructions:
+        type: string
+        description: The instructions for time deposit renewal. This is a reference
+          data field. Please use /v1/apac/utilities/referenceData/{renewalInstructions}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: RENEW_PRINCIPAL_ONLY
+      tenorTerm:
+        type: integer
+        description: The tenor term for the deposit, expressed as a whole number
+        example: 12
+      tenorPeriod:
+        type: string
+        description: The unit of the tenor term. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{tenorPeriod} resource to get valid
+          value of this field with description. You can use the field name as the
+          referenceCode parameter to retrieve the values.
+        example: MONTHS
+      baseCurrencyMaturityAmount:
+        type: number
+        format: double
+        description: The investment amount and accrued interest in base currency
+        example: 145071.250000
+      maturityInterestAmount:
+        type: number
+        format: double
+        description: The accrued interest in base currency.
+        example: 5071.250000
+      lastInterestPaymentAmount:
+        type: number
+        format: double
+        description: Last interest amount for the time deposit account
+        example: 107.250000
+    required:
+    - displayAccountNumber
+  CallDepositAccount:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Call Deposit Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0051_VC201
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      currencyCode:
+        type: string
+        description: The currency code of the account in ISO 4217 format
+        example: EUR
+      availableBalance:
+        type: number
+        format: double
+        description: The amount available  to withdraw or transfer immediately
+        example: 15000.250000
+      currentBalance:
+        type: number
+        format: double
+        description: The current balance including any pending or in progress deposits
+          and withdrawals
+        example: 15000.250000
+      interestRate:
+        type: number
+        format: double
+        description: The rate of interest applicable for the call deposit account
+        example: 0.012500
+      openingDate:
+        type: string
+        format: date
+        description: Call deposit account opening date in ISO 8601 date format YYYY-MM-DD
+        example: "2007-12-01"
+      baseCurrencyMaturityAmount:
+        type: number
+        format: double
+        description: Maturity amount on the call deposit account.
+        example: 15000.250000
+      lastInterestPaymentAmount:
+        type: number
+        format: double
+        description: Last interest payment amount on the call deposit account.
+        example: 500.250000
+      lastInterestPaymentDate:
+        type: string
+        format: date
+        description: Last interest payment date in ISO 8601 date format YYYY-MM-DD
+        example: "2016-12-02"
+    required:
+    - displayAccountNumber
+  Security:
+    properties:
+      securityName:
+        type: string
+        description: The security name
+        example: UBS CALLABLE RANGE ACCRUAL UNIT - SERIES 2 AUD
+      stockCode:
+        type: string
+        description: Unique code associated with security.
+        example: TIB
+      stockMarketCode:
+        type: string
+        description: Trading market code for securities.
+        example: SGX
+      marketValueAmount:
+        type: number
+        format: double
+        description: The current market worth of investment
+        example: 166171.530000
+      investmentAmount:
+        type: number
+        format: double
+        description: The investment amount
+        example: 166000.250000
+      currencyCode:
+        type: string
+        description: The currency code of the account in ISO 4217 format
+        example: EUR
+      averageUnitCost:
+        type: number
+        format: double
+        description: Average unit cost
+        example: 12.580000
+      maturityDate:
+        type: string
+        format: date
+        description: The maturity date in ISO 8601 format YYYY-MM-DD
+        example: "2018-12-31"
+      availableUnits:
+        type: number
+        format: double
+        description: The available units
+        example: 1000.250000
+      settledUnits:
+        type: number
+        format: double
+        description: The settled units
+        example: 100
+      assignedUnits:
+        type: number
+        format: double
+        description: The assigned units
+        example: 95
+      confirmedUnits:
+        type: number
+        format: double
+        description: The confirmed units
+        example: 95
+      pendingUnits:
+        type: number
+        format: double
+        description: The pending units
+        example: 5
+      blockUnits:
+        type: number
+        format: double
+        description: The blocked units
+        example: 0
+      unrealizedGains:
+        type: number
+        format: double
+        description: The unrealized gain
+        example: 2500.250000
+      unrealizedPercentageGain:
+        type: number
+        format: double
+        description: The unrealized gain in percentage
+        example: 1500.250000
+      latestPrice:
+        type: number
+        format: double
+        description: The latest price
+        example: 50.250000
+  MutualFundAccount:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Mutual Fund Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0201_VC890
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      currencyCode:
+        type: string
+        description: The currency code of the account in ISO 4217 format
+        example: EUR
+      totalNetAssetValueAmount:
+        type: number
+        format: double
+        description: Total of net asset value of mutual funds
+        example: "5000.25"
+      totalTransactionAmount:
+        type: number
+        format: double
+        description: Total transaction amount in local currency
+        example: "4500.25"
+      totalUnrealizedGains:
+        type: number
+        format: double
+        description: Total unrealized gains amount, profitable position that has yet
+          to be cashed in
+        example: "500.25"
+      relationship:
+        $ref: '#/definitions/Relationship'
+      mutualFund:
+        type: array
+        items:
+          $ref: '#/definitions/MutualFund'
+    required:
+    - displayAccountNumber
+  PremiumDepositAccount:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Premium Deposit Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0061_VC401
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      baseCurrencyPrincipalAmount:
+        type: number
+        format: double
+        description: The investment amount in base currency
+        example: 100000.250000
+      baseCurrencyCode:
+        type: string
+        description: The base currency code in ISO 4217 format
+        example: AUD
+      alternateCurrencyPrincipalAmount:
+        type: number
+        format: double
+        description: The investment amount in alternate currency
+        example: 145000.250000
+      openingDate:
+        type: string
+        format: date
+        description: Premium deposit open date in ISO 8601 date format YYYY-MM-DD
+        example: "2016-12-02"
+      alternateCurrencyCode:
+        type: string
+        description: The alternate currency code in ISO 4217 format
+        example: EUR
+      baseCurrencyDisposalAccount:
+        type: string
+        description: The account number to deposit returns of base currency, upon
+          maturity
+        example: C036
+      alternateCurrencyDisposalAccount:
+        type: string
+        description: The account number to deposit returns of alternate currency,
+          upon maturity
+        example: C978
+      baseCurrencyInterestAmount:
+        type: number
+        format: double
+        description: The accrued interest amount in base currency
+        example: 1000.250000
+      alternateCurrencyInterestAmount:
+        type: number
+        format: double
+        description: The accrued interest amount in alternate currency
+        example: 1050.250000
+      baseCurrencyMaturityAmount:
+        type: number
+        format: double
+        description: The investment amount and accrued interest in base currency
+        example: 145071.250000
+      alternateCurrencyMaturityAmount:
+        type: number
+        format: double
+        description: The investment amount and accrued interest in alternate currency
+        example: 90867.250000
+      baseCurrencyPremiumAmount:
+        type: number
+        format: double
+        description: A part or all of the interest the customer earns on the Premium
+          Account represents the premium that the bank pays the customer for the currency
+          option
+        example: 145000.250000
+      maturityDate:
+        type: string
+        format: date
+        description: The date when the premium deposit will mature, in ISO8601 date
+          format YYYY-MM-DD
+        example: "2018-12-31"
+      strikePrice:
+        type: number
+        format: double
+        description: The Pre-agreed exchange rate
+        example: 145.250000
+      customerInterestRate:
+        type: number
+        format: double
+        description: The customer interest rate applicable for the premium deposit
+        example: 4.010000
+      accruedInterestRate:
+        type: number
+        format: double
+        description: The accrued interest rate applicable for the premium deposit
+        example: 5.010000
+      benchmarkInterestRate:
+        type: number
+        format: double
+        description: The benchmark interest rate applicable for the premium deposit
+        example: 4.010000
+      dealStatus:
+        type: string
+        description: The deal status. This is a reference data field. Please use /v1/apac/utilities/referenceData/{dealStatus}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: ACTIVE
+      expiryDate:
+        type: string
+        format: date
+        description: The date when the premium deposit deal will expire, in ISO8601
+          date format YYYY-MM-DD
+        example: "2018-12-31"
+      tenorTerm:
+        type: integer
+        description: The tenor term for deposit
+        example: 12
+      tenorPeriod:
+        type: string
+        description: This is a reference data field. Please use /v1/apac/utilities/referenceData/{tenorPeriod}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: MONTHS
+      relationship:
+        $ref: '#/definitions/Relationship'
+    required:
+    - displayAccountNumber
+  SavingsAccount:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Personal Saving Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0200_VC400
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      currentBalance:
+        description: The current balance including any pending or in progress deposits
+          and withdrawals
+        type: number
+        format: double
+        example: 10000.250000
+      availableBalance:
+        description: The amount available  to withdraw or transfer immediately
+        type: number
+        format: double
+        example: 15000.250000
+      currencyCode:
+        type: string
+        description: The currency code of the account in ISO 4217 format
+        example: EUR
+      lastStatementDate:
+        type: string
+        format: date
+        description: The date of the last statement in ISO 8601 date format YYYY-MM-DD
+        example: "2015-06-25"
+      holdAmount:
+        type: number
+        format: double
+        description: A portion of account balance unavailable for use for a set period
+        example: 12900.120000
+      openingDate:
+        type: string
+        format: date
+        description: Saving account opening date in ISO 8601 date format YYYY-MM-DD
+        example: "2007-12-01"
+      floatAmount:
+        type: number
+        format: double
+        description: The total amount of funds that have not yet been cleared through
+          the collection process for cheque and other instruments deposited to a savings
+          account. These funds are unavailable for withdrawal until they are paid
+          by the drawee bank.
+        example: 250000.250000
+      totalInterestAmount:
+        type: number
+        format: double
+        description: Total interest amount on the saving account
+        example: 1250.250000
+    required:
+    - displayAccountNumber
+  AccountDetailsResponse:
+    description: Detailed account information
+    properties:
+      creditCardAccount:
+        $ref: '#/definitions/CreditCardAccount'
+      readyCreditAccount:
+        $ref: '#/definitions/ReadyCreditAccount'
+      checkingAccount:
+        $ref: '#/definitions/CheckingAccount'
+      savingsAccount:
+        $ref: '#/definitions/SavingsAccount'
+      timeDepositAccount:
+        $ref: '#/definitions/TimeDepositAccount'
+      loanAccount:
+        $ref: '#/definitions/LoanAccount'
+      mutualFundAccount:
+        $ref: '#/definitions/MutualFundAccount'
+      securitiesBrokerageAccount:
+        $ref: '#/definitions/SecuritiesBrokerageAccount'
+      callDepositAccount:
+        $ref: '#/definitions/CallDepositAccount'
+      premiumDepositAccount:
+        $ref: '#/definitions/PremiumDepositAccount'
+  ReadyCreditAccount:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Ready Credit Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0900_VC301
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2364
+      currencyCode:
+        type: string
+        description: The currency code of the account in ISO 4217 format
+        example: EUR
+      outstandingBalance:
+        description: The amount of money owed
+        type: number
+        format: double
+        example: 10000.250000
+      lastStatementBalance:
+        description: The balance on last statement date
+        type: number
+        format: double
+        example: 15000.250000
+      lastStatementDate:
+        type: string
+        format: date
+        description: The date of the last statement in ISO 8601 date format YYYY-MM-DD
+        example: "2015-06-25"
+      minimumDueAmount:
+        type: number
+        format: double
+        description: Minimum due amount for a payment cycle
+        example: 1500.250000
+      creditLimit:
+        type: number
+        format: double
+        description: The maximum amount of credit that extend to a customer
+        example: 50000.250000
+      availableCredit:
+        type: number
+        format: double
+        description: Available credit limit of ready credit account
+        example: 3750.500000
+      cashAdvanceLimit:
+        type: number
+        format: double
+        description: Some percentage of credit limit to withdraw cash
+        example: 15000.250000
+      cashAdvanceAvailableAmount:
+        type: number
+        format: double
+        description: The amount available under cash advance limit
+        example: 15000.250000
+      lastPaymentAmount:
+        type: number
+        format: double
+        description: The amount of the last payment made
+        example: 1500.250000
+      lastPaymentDate:
+        type: string
+        format: date
+        description: The date of the last payment in ISO 8601 date format YYYY-MM-DD
+        example: "2015-06-12"
+      nextPaymentAmount:
+        type: number
+        format: double
+        description: The next payment amount due
+        example: 1500.250000
+      nextPaymentDate:
+        type: string
+        format: date
+        description: The date of the next payment in ISO 8601 date format YYYY-MM-DD
+        example: "2015-06-12"
+    required:
+    - displayAccountNumber
+  SecuritiesBrokerageAccount:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Securities Brokerage Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0101_VC801
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      currencyCode:
+        type: string
+        description: The currency code of the account in ISO 4217 format
+        example: EUR
+      totalSecuritiesValueAmount:
+        type: number
+        format: double
+        description: The total market worth of securities
+        example: "5000.25"
+      totalTransactionAmount:
+        type: number
+        format: double
+        description: Total transaction amount in local currency
+        example: "4500.25"
+      totalUnrealizedGains:
+        type: number
+        format: double
+        description: Total unrealized gains amount, profitable position that has yet
+          to be cashed in
+        example: "500.25"
+      relationship:
+        $ref: '#/definitions/Relationship'
+      security:
+        type: array
+        items:
+          $ref: '#/definitions/Security'
+    required:
+    - displayAccountNumber
+  Relationship:
+    properties:
+      relationshipName:
+        type: string
+        description: The relationship name for a customer
+        example: Javier Perez Cuellar- Individual
+      relationshipType:
+        type: string
+        description: This is a reference data field. Please use /v1/apac/utilities/referenceData/{relationshipType}
+          resource to get valid value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        example: SOLE_OWNER
+  CheckingAccount:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+        example: Checking Account
+      productCode:
+        type: string
+        description: A unique code that identifies the product
+        example: 0100_VC300
+      displayAccountNumber:
+        type: string
+        description: A masked account number that can be displayed to the customer
+        example: XXXXXX2391
+      currentBalance:
+        description: The current balance including any pending or in progress deposits
+          and withdrawals
+        type: number
+        format: double
+        example: 10000.250000
+      availableBalance:
+        description: The amount available  to withdraw or transfer immediately
+        type: number
+        format: double
+        example: 11000.250000
+      overdraftLimit:
+        type: number
+        format: double
+        description: This allows a customer to overdraw their account up to a specific
+          amount
+        example: 15000.250000
+      availableOverdraftLimit:
+        type: number
+        format: double
+        description: The amount available under over draft Limit amount
+        example: 13200.250000
+      currencyCode:
+        type: string
+        description: The currency code of the account in ISO 4217 format
+        example: EUR
+      lastStatementDate:
+        type: string
+        format: date
+        description: The date of the last statement in ISO 8601 date format YYYY-MM-DD
+        example: "2015-06-25"
+      holdAmount:
+        type: number
+        format: double
+        description: The amount of funds that were previously available but are now
+          blocked. It represents funds authorized for withdrawal but not yet withdrawn.
+          The hold amount is included in the ledger/book balance but not in the available
+          balance. It is included in interest
+        example: 12900.120000
+      floatAmount:
+        type: number
+        format: double
+        description: The total amount of funds that have not yet been cleared through
+          the collection process for cheque and other instruments deposited to a checking
+          account. These funds are unavailable for withdrawal until they are paid
+          by the drawee bank.
+        example: 250000.250000
+      totalInterestAmount:
+        type: number
+        format: double
+        description: Total interest amount on checking account.
+        example: 1212.120000
+      openingDate:
+        type: string
+        format: date
+        description: Checking account opening date in ISO 8601 date format YYYY-MM-DD
+        example: "2007-12-01"
+    required:
+    - displayAccountNumber
+  TransactionDetailsResponse:
+    properties:
+      transactions:
+        type: array
+        description: Transactions list
+        items:
+          $ref: '#/definitions/Transaction'
+      investmentTransaction:
+        type: array
+        description: Investment Transactions list
+        items:
+          $ref: '#/definitions/InvestmentTransaction'
+      nextStartIndex:
+        type: string
+        description: In some cases there is more data than what can be returned in
+          a single response. If there is additional data available a nextStartIndex
+          will be returned. Pass the nextStartIndex in your next request to retrieve
+          the next set of data.
+        example: "11"
+  InvestmentTransaction:
+    properties:
+      orderDate:
+        description: Order date in YYYY-MM-DD format value conforming to ISO 8601.
+          This needs to be formatted in front-end for country/locale specific display
+          purposes. This is the field used for default sorting
+        type: string
+        format: date
+        example: "2016-09-05"
+      orderReferenceId:
+        description: Reference Id to uniquely identify the investment transaction
+        type: string
+        example: "100234568743532"
+      orderType:
+        description: This is a reference data field. Please use /v1/apac/utilities/referenceData/{orderType}
+          resource to get possible value of this field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        type: string
+        example: BUY
+      code:
+        description: Order code to uniquely identify the transaction,
+        type: string
+        example: BCF0001BB
+      name:
+        description: Unique name  for fund/stock
+        type: string
+        example: BIMI51807310002051
+      currencyCode:
+        description: The currency code of the transaction in ISO 4217 format,
+        type: string
+        example: EUR
+      transactionAmount:
+        description: Transaction amount in local currency.
+        type: number
+        format: double
+        example: 12500.120000
+      price:
+        description: Order price of  trade
+        type: number
+        format: double
+        example: 21.320000
+      orderStatus:
+        description: This is a reference data field. Please use /v1/apac/utilities/referenceData/{orderStatus}
+          resource to get possible value of This field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values.
+        type: string
+        example: SETTLED
+      grossAmount:
+        description: The total amount of the transaction
+        type: number
+        format: double
+        example: 5000.250000
+      orderQuantity:
+        description: Total number of units ordered
+        type: number
+        format: double
+        example: 1100
+      orderMedium:
+        description: The medium used by customer to place order.This is a reference
+          data field. Please use /v1/apac/utilities/referenceData/{orderMedium} resource
+          to get possible values of This field with descriptions. You can use the
+          field name as the referenceCode parameter to retrieve the values.
+        type: string
+        example: INTERNET
+      filledQuantity:
+        description: Number of units received
+        type: number
+        format: double
+        example: 1100
+      balanceQuantity:
+        description: Number of units not received
+        type: number
+        format: double
+        example: 1255
+      stockMarketCode:
+        description: Trading market code for securities
+        type: string
+        example: NYSE
+  Transaction:
+    properties:
+      displayAccountNumber:
+        description: A masked account number that can be displayed to the customer
+        type: string
+        example: XXXXXX2391
+      transactionDate:
+        description: Transaction date in YYYY-MM-DD format value conforming to ISO
+          8601. This needs to be formatted in front-end for country/locale specific
+          display purposes. This is the field used for default sorting,
+        type: string
+        format: date
+        example: "2015-06-21"
+      transactionDescription:
+        description: Transaction description from the merchant, POS or bank. If there
+          are foreign currency transactions on checking /saving account(s) then description
+          includes exchange rate, city and country.
+        type: string
+        example: INTEREST PAYMENT
+      transactionReferenceId:
+        description: Reference Id to uniquely identify the transaction
+        type: string
+        example: BIMI51807310002051
+      checkSerialNumber:
+        description: The check serial number. Applicable for checking accounts only
+        type: string
+        example: "89000125"
+      transactionAmount:
+        description: Transaction amount in local currency.
+        type: number
+        format: double
+        example: 50.550000
+      currencyCode:
+        description: The currency code of the transaction in ISO 4217 format
+        type: string
+        example: EUR
+      foreignTransactionAmount:
+        type: number
+        description: The transaction amount in the foreign currency
+        example: 50.550000
+      foreignCurrencyCode:
+        type: string
+        description: The foreign currency code of the transaction in ISO 4217 format
+        example: USD
+      foreignExchangeRate:
+        type: number
+        description: The exchange rate at the time the foreign transaction was done
+        example: 1.550000
+      transactionType:
+        description: The type of transaction. This is a reference data field. Please
+          use /v1/apac/utilities/referenceData/{transactionType} resource to get possible
+          values of this field with descriptions. You can use the field name as the
+          referenceCode parameter to retrieve the values
+        type: string
+        example: DEBIT
+      transactionStatus:
+        description: The status of the transaction.  Applicable for credit cards only..
+          This is a reference data field. Please use /v1/apac/utilities/referenceData/{transactionStatus}
+          resource to get possible values of this field with descriptions. You can
+          use the field name as the referenceCode parameter to retrieve the values
+        type: string
+        example: BILLED
+      runningBalance:
+        description: The amount available to transact immediately
+        type: number
+        format: double
+        example: 1485.800000
+      transactionPostingDate:
+        description: Transaction posting date in YYYY-MM-DD format value conforming
+          to ISO 8601. This needs to be formatted in front-end for country/locale
+          specific display purposes. This is the field used for default sorting
+        type: string
+        format: date
+        example: "2016-12-02"
+      transactionCode:
+        description: The transaction code
+        type: string
+        example: "260"
+      merchantName:
+        type: string
+        description: The merchant name with which this transaction was made with
+        example: Alcott EU, Via Alberto Lionello, Roma
+      eligibleForEqualPaymentPlan:
+        description: The EPP allowed indicator. This is applicable for credit cards
+          transactions only. This is a reference data field. Please use /v1/apac/utilities/referenceData/{eligibleForEqualPaymentPlan}
+          resource to get possible value of This field with description. You can use
+          the field name as the referenceCode parameter to retrieve the values
+        type: string
+        example: ELIGIBLE
+paths:
+  /v1/accounts:
+    get:
+      summary: Retrieve summary of all accounts
+      description: Returns a summary of all accounts held by a Citi customer who has
+        authorized your application. If a customer has multiple but similar accounts,
+        e.g. two savings accounts, the accounts will be returned in the array accountGroupSummary.
+      tags: []
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'The most recent Authorization token. This will have the format
+          Bearer + {space} + {accessToken}. Example: Bearer KGNsaWVudF9pZDpjbGllbnRfc2VjcmV0KQ==.'
+        type: string
+        required: true
+      - name: uuid
+        in: header
+        description: 128 bit random UUID generated uniquely for every request.
+        type: string
+        required: true
+      - name: Accept
+        in: header
+        description: Content-Type that are acceptable for the response.
+        type: string
+        required: true
+      - name: client_id
+        in: header
+        description: client_id generated during consumer onboarding
+        type: string
+        required: true
+      - name: nextStartIndex
+        in: query
+        description: In some cases there is more data than what can be returned in
+          a single response. If there is additional data available a nextStartIndex
+          will be returned. Pass the nextStartIndex in your next request to retrieve
+          the next set of data.
+        type: string
+        required: false
+      responses:
+        200:
+          description: Successful operation.
+          schema:
+            $ref: '#/definitions/AccountsGroupList'
+        400:
+          description: <table class="table"><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>invalid</td><td>invalidRequest</td><td>Missing
+            or invalid parameters</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        401:
+          description: <table class="table"><tr><td>error</td><td>unAuthorized</td><td>Authorization
+            credentials are missing or invalid</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: <table class="table"><tr><td>error</td><td>accessNotConfigured</td><td>Access
+            is not configured for this resource</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        404:
+          description: <table class="table"><tr><td>error</td><td>resourceNotFound</td><td>Empty
+            resource/resource not found</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: <table class="table"><tr><td>fatal</td><td>serverUnavailable</td><td>The
+            request failed due to an internal error</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      consumes:
+      - application/json
+      produces:
+      - application/json
+  /v1/accounts/{accountId}:
+    get:
+      summary: Retrieve account details
+      description: Returns additional account details than what is provided in the
+        summary of all accounts. To retrieve the details, simply pass the accountId
+        returned to you from the account summary.
+      tags: []
+      parameters:
+      - name: accountId
+        in: path
+        description: The account identifier in encrypted format.Typically, this is
+          not displayed to the customer
+        type: string
+        required: true
+      - name: Authorization
+        in: header
+        description: 'The most recent Authorization token. This will have the format
+          Bearer + {space} + {accessToken}. Example: Bearer KGNsaWVudF9pZDpjbGllbnRfc2VjcmV0KQ==.'
+        type: string
+        required: true
+      - name: uuid
+        in: header
+        description: 128 bit random UUID generated uniquely for every request.
+        type: string
+        required: true
+      - name: Accept
+        in: header
+        description: Content-Type that are acceptable for the response.
+        type: string
+        required: true
+      - name: client_id
+        in: header
+        description: client_id generated during consumer onboarding
+        type: string
+        required: true
+      responses:
+        200:
+          description: Successful operation.
+          schema:
+            $ref: '#/definitions/AccountDetailsResponse'
+        400:
+          description: <table class="table"><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>invalid</td><td>invalidRequest</td><td>Missing
+            or invalid parameters</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        401:
+          description: <table class="table"><tr><td>error</td><td>unAuthorized</td><td>Authorization
+            credential is missing or invalid</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: <table class="table"><tr><td>error</td><td>accessNotConfigured</td><td>Access
+            is not configured for this resource</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        404:
+          description: <table class="table"><tr><td>error</td><td>resourceNotFound</td><td>Empty
+            resource/resource not found</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: <table class="table"><tr><td>fatal</td><td>serverUnavailable</td><td>The
+            request failed due to an internal error</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /v1/accounts/{accountId}/transactions:
+    get:
+      summary: Retrieve transactions
+      description: Returns an array of transactions for the specified account. For
+        investment transactions such as buying or selling a stock, they will be returned
+        in the array investmentTransaction.
+      tags: []
+      parameters:
+      - name: accountId
+        in: path
+        description: The account identifier in encrypted format.Typically, this is
+          not displayed to the customer.
+        type: string
+        required: true
+      - name: transactionStatus
+        in: query
+        description: Applicable for credit cards only. This is a reference data field.
+          Please use /v1/apac/utilities/referenceData/{transactionStatus} resource
+          to get possible value of this field with description. You can use the field
+          name as the referenceCode parameter to retrieve the values.
+        type: string
+        required: false
+      - name: nextStartIndex
+        in: query
+        description: In some cases there is more data than what can be returned in
+          a single response. If there is additional data available a nextStartIndex
+          will be returned. Pass the nextStartIndex in your next request to retrieve
+          the next set of data.
+        type: string
+        required: false
+      - name: requestSize
+        in: query
+        description: Requested number of transactions.The maximum we can provide in
+          one response is 50. If nothing is specified, we will return 20. Currently
+          this field is not supported.
+        type: string
+        required: false
+      - name: transactionFromDate
+        in: query
+        description: 'Starting range for transaction date in ISO 8601 date format
+          ''YYYY-MM-DD''. Date Range: Upto last 12 months for CASA and last 3 Billing
+          Cycle for credit card and ready credit accounts. Note :Applicable for advance
+          search for  CASA / Ready Credt / Credit Card account products'
+        type: string
+        required: false
+      - name: transactionToDate
+        in: query
+        description: 'End range for transaction date in ISO 8601 date format ''YYYY-MM-DD''.
+          Date Range: Upto last 12 months for CASA and last 3 Billing Cycle for credit
+          card and ready credit accounts. Note :Applicable for advance search for  CASA
+          / Ready Credt / Credit Card account products'
+        type: string
+        required: false
+      - name: amountFrom
+        in: query
+        description: 'Starting range of transaction amount. Note: Applicable for Investment
+          accounts'
+        type: string
+        required: false
+      - name: amountTo
+        in: query
+        description: 'End range of transaction amount. Note: Applicable for Investment
+          accounts'
+        type: string
+        required: false
+      - name: Authorization
+        in: header
+        description: 'The most recent Authorization token. This will have the format
+          Bearer + {space} + {accessToken}. Example: Bearer KGNsaWVudF9pZDpjbGllbnRfc2VjcmV0KQ==.'
+        type: string
+        required: true
+      - name: uuid
+        in: header
+        description: 128 bit random UUID generated uniquely for every request.
+        type: string
+        required: true
+      - name: Accept
+        in: header
+        description: Content-Type that are acceptable for the response.
+        type: string
+        required: true
+      - name: client_id
+        in: header
+        description: client_id generated during consumer onboarding
+        type: string
+        required: true
+      responses:
+        200:
+          description: Successful operation.
+          schema:
+            $ref: '#/definitions/TransactionDetailsResponse'
+        206:
+          description: Partial success response. This is applicable for scenarios
+            where both pending and normal transactions are requested, but with which
+            any one of them failed
+          schema:
+            $ref: '#/definitions/TransactionDetailsResponse'
+        400:
+          description: <table class="table"><tr><td>Type</td><td>Code</td><td>Details</td></tr>                        <tr><td>invalid</td><td>invalidRequest</td><td>Missing
+            or invalid Parameters</td></tr><tr><td>error</td><td>invalidSearch</td><td>This
+            Search criteria is not supported for this Product.</td></tr></tr><tr><td>error</td><td>invalidDateRange</td><td>Date
+            range is invalid</td></tr><tr><td>error</td><td>invalidAmountRange</td><td>Amount
+            range is invalid</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        401:
+          description: <table class="table"><tr><td>error</td><td>unAuthorized</td><td>Authorization
+            credentials are missing or invalid</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: <table class="table"><tr><td>error</td><td>accessNotConfigured</td><td>Access
+            is not configured for this resource</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        404:
+          description: <table class="table"><tr><td>error</td><td>resourceNotFound</td><td>Empty
+            resource/resource not found</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: <table class="table"><tr><td>fatal</td><td>serverUnavailable</td><td>The
+            request failed due to an internal error</td></tr></table>
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+consumes:
+- application/json
+produces:
+- application/json
+host: sandbox.apihub.citi.com
+...
